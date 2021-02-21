@@ -36,9 +36,11 @@ func TestGetDescriptionByName(t *testing.T) {
 		},
 	}
 	a := assert.New(t)
+	pokemonCache := NewPokemonStore(logger.LogEntryWithRef())
+	pokemonService := NewPokemonService(&PokeMockAPI{}, pokemonCache)
 	for _, testCase := range testCases {
 		t.Run(testCase.testDescription, func(t *testing.T) {
-			pokemonDetails, err := NewPokemonStore(logger.LogEntryWithRef()).GetDetailsByName("pokemon", testCase.version, &PokeMockAPI{})
+			pokemonDetails, err := pokemonService.GetDetailsByName("pokemon", testCase.version)
 			a.Nil(err, testCase)
 			a.Equal(testCase.description, pokemonDetails.Description)
 		})

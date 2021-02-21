@@ -7,6 +7,11 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+type PokemonCache interface {
+	Get(uniqueID string) (*Pokemon, error)
+	Save(pokemon *Pokemon)
+}
+
 type PokemonStore struct {
 	Store  *sync.Map
 	logger *logrus.Entry

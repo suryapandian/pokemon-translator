@@ -7,6 +7,11 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+type TranslatorCache interface {
+	Get(text string) (string, error)
+	Save(text, translation string)
+}
+
 type TranslatorStore struct {
 	Cache  *sync.Map
 	logger *logrus.Entry

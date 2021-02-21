@@ -1,14 +1,23 @@
 package pokemon
 
-func (p *PokemonStore) GetDetailsByName(name, version string, apiClient PokemonAPI) (*Pokemon, error) {
+type PokemonService struct {
+	ApiClient PokemonAPI
+	Cache     PokemonCache
+}
+
+func NewPokemonService(apiClient PokemonAPI, cache PokemonCache) *PokemonService {
+	return &PokemonService{ApiClient: apiClient, Cache: cache}
+}
+
+func (p *PokemonService) GetDetailsByName(name, version string) (*Pokemon, error) {
 	pokemon := &Pokemon{Name: name, Version: version}
 	pokemon.setUniqueID()
 
-	if pokemonCache, err := p.Get(pokemon.UniqueID); err == nil {
+	if pokemonCache, err := p.Cache.Get(pokemon.UniqueID); err == nil {
 		return pokemonCache, err
 	}
 
-	species, err := apiClient.PokemonSpecies(name)
+	species, err := p.ApiClient.PokemonSpecies(name)
 	if err != nil {
 		return nil, ErrPokemonNotFound
 	}
@@ -23,6 +32,6 @@ func (p *PokemonStore) GetDetailsByName(name, version string, apiClient PokemonA
 			break
 		}
 	}
-	p.Save(pokemon)
+	p.Cache.Save(pokemon)
 	return pokemon, err
 }

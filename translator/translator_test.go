@@ -10,8 +10,8 @@ import (
 
 func GetTranslation(t *testing.T) {
 	a := assert.New(t)
-	translatorAPI := TranslatorMock{}
-	translation, err := NewTranslatorStore(logger.LogEntryWithRef()).GetTranslation("test data", &translatorAPI)
+	translatorCache := NewTranslatorStore(logger.LogEntryWithRef())
+	translation, err := NewTranslatorService(&TranslatorMock{}, translatorCache).GetTranslation("test data")
 	a.Nil(err)
 	a.NotEmpty(translation)
 }

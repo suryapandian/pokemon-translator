@@ -14,14 +14,14 @@ func TestGet(t *testing.T) {
 		Version: "ruby",
 	}
 	pokemon.setUniqueID()
-
+	pokemonCache := NewPokemonStore(logger.LogEntryWithRef())
 	a := assert.New(t)
-	pokemonDetails, err := NewPokemonStore(logger.LogEntryWithRef()).Get(pokemon.UniqueID)
+	pokemonDetails, err := pokemonCache.Get(pokemon.UniqueID)
 	a.Empty(pokemonDetails)
 	a.Equal(ErrPokemonNotFound, err)
 
-	NewPokemonStore(logger.LogEntryWithRef()).Save(pokemon)
-	pokemonDetails, err = NewPokemonStore(logger.LogEntryWithRef()).Get(pokemon.UniqueID)
+	pokemonCache.Save(pokemon)
+	pokemonDetails, err = pokemonCache.Get(pokemon.UniqueID)
 	a.Nil(err)
 	a.NotEmpty(pokemonDetails)
 }
