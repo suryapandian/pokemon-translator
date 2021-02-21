@@ -1,10 +1,10 @@
-### Pokemons in a Shakespearean world
+### Pokémons in a Shakespearean world
 
 ## Design
 
-This is a simple web server with an endpoint to get the Shakespearean description of pokemon characters. 
+This is a simple web server with an endpoint to get the Shakespearean description of Pokémons. 
 
-The application gets the description of pokemon characters from pokeapi.co's go sdk package [pokeapi](https://pokeapi.co/) and the Shakespearean translations from [funtranslations](https://funtranslations.com/api/shakespeare). The required data from the responses are cached locally to avoid subsequent requests for the same payload to the third-party sites. The cache is a simple pluggable in-memory interface. Since the cache is a pluggable module, if needed we can replace the cache with persistent storage with minimal code change.
+The application gets the description of Pokémons from pokeapi.co's go sdk package [pokeapi](https://pokeapi.co/) and the Shakespearean translations from [funtranslations](https://funtranslations.com/api/shakespeare). The required data from the responses are cached locally to avoid subsequent requests for the same payload to the third-party sites. The cache is a simple pluggable in-memory interface. Since the cache is a pluggable module, if needed we can replace the cache with persistent storage with minimal code change.
 
 The app is tested and a CI pipeline is also set up through GitHub actions. The requests to third-party websites like `pokeapi` and `funtranslations` are mocked for testing purposes.
 
@@ -12,7 +12,7 @@ The app is tested and a CI pipeline is also set up through GitHub actions. The r
 
 # /pokemon/pikachu (GET)
 
- This API provides the Shakespearean description of the requested pokemon.
+ This API provides the Shakespearean description of the requested pokémon.
 
 
 + Response 200 (application/json)

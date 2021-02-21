@@ -7,6 +7,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"time"
 )
 
 type TranslatorAPI interface {
@@ -45,7 +46,10 @@ func (t *Translator) GetTranslation(data string) (translatedData string, err err
 	return translateRes.Contents.Translated, err
 }
 
-const contentTypeJSON = "application/json"
+const (
+	contentTypeJSON           = "application/json"
+	thidpartyTimeoutInSeconds = 5
+)
 
 func requestJSON(method, url, path string, body io.Reader, obj interface{}) error {
 	req, err := http.NewRequest(method, url+path, body)
@@ -57,7 +61,11 @@ func requestJSON(method, url, path string, body io.Reader, obj interface{}) erro
 	req.URL.RawQuery = q.Encode()
 	req.Header.Add("content-type", contentTypeJSON)
 
-	resp, err := http.DefaultClient.Do(req)
+	client := http.Client{
+		Timeout: thidpartyTimeoutInSeconds * time.Second,
+	}
+
+	resp, err := client.Do(req)
 	if err != nil {
 		return fmt.Errorf("Error getting response %w", err)
 	}
