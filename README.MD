@@ -1,8 +1,8 @@
-### An app that gives Shakespearean translation for pokemon
+### Pokemons in Shakespearean world
 
 ## Design
 
-This is a simple web server with an endpoint to get the Shakespearean description of pokemon characters. The webserver gets the description of pokemon characters from pokeapi.co's go sdk package (pokeapi.co) and the Shakespearean translations from `funtranslations.com`. The responses are cached locally in in-memory so that subsequent requests to the web server for the same character can be served from the cache.
+This is a simple web server with an endpoint to get the Shakespearean description of pokemon characters. The webserver gets the description of pokemon characters from pokeapi.co's go sdk package [pokeapi](https://pokeapi.co/) and the Shakespearean translations from [funtranslations](https://funtranslations.com/api/shakespeare). The responses are cached locally in in-memory so that subsequent requests to the web server for the same character can be served from the cache.
 
 The app is tested and a CI pipeline is also set up through GitHub actions. The requests to third-party websites like `pokeapi` and `funtranslations` are mocked for testing purposes.
 
