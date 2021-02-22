@@ -59,8 +59,8 @@ To ensure a clean code.
    Install pre-commit [https://pre-commit.com/#install]
    Install .pre-commit-config.yaml as a pre-commit hook
 
-  pre-commit install
+  `pre-commit install`
 
-    Go static analysis tools run automatically on pre-commit. Run checks manually if needed using
+  Go static analysis tools run automatically on pre-commit. Run checks manually if needed using
 
-  pre-commit run --all-files
+  `pre-commit run --all-files`
