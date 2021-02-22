@@ -49,6 +49,8 @@ To run the application without docker, please install go 1.15 and run `go run -m
 
  - Since the app is dependent on third-party websites set up a circuit breaker and a failover mechanism.
 
+ - While invoking the internal third-party wrapper module, as of now only the API URL is passed. In the future, we might want to pass API token and other configurations for circuit breaking, etc… So, we can change the wrapper module to accept an object instead of a string to accommodate as many additional attributes as needed.
+
  - pokeapi's go SDK has been used so that it would be easier to extend the app and support additional endpoints. However, if there is no plan for extending the app, we could remove the dependency on the poke-api package and directly make the API call. The lesser the number of dependencies the easier the code is to maintain.
 
 ## Pre-commit 
