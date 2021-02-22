@@ -61,6 +61,7 @@ To ensure a clean code.
 
   `pre-commit install`
 
-  Go static analysis tools run automatically on pre-commit. Run checks manually if needed using
+  Go static analysis tools run automatically on pre-commit. 
+  Run checks manually if needed using:
 
   `pre-commit run --all-files`
